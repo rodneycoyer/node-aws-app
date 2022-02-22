@@ -1,10 +1,13 @@
 import React from "react";
-import SignIn from "./SignInComponent";
+
+// convert to layout component wrapper
+// navBar
+// footer
 
 function MainComponent() {
 
   return (
-    <SignIn />
+    <h1> Main Component </h1>
   );
 }
 

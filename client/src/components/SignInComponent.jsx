@@ -31,20 +31,17 @@ function Copyright(props) {
   );
 }
 
-// yup schema validation
-
-
 const SignIn = () => {
 
   const validationSchema = yup.object({
-  email: yup
-    .string("Enter a valid email")
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup
-    .string("Enter your password")
-    .min(8, "Password should be of minimum 8 characters length")
-    .required("Password is required"),
+    email: yup
+      .string("Enter a valid email")
+      .email("Enter a valid email")
+      .required("Email is required"),
+    password: yup
+      .string("Enter your password")
+      .min(8, "Password should be of minimum 8 characters length")
+      .required("Password is required"),
   });
 
   const submitHandler = async value => {
