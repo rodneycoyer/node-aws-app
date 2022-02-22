@@ -1,15 +1,15 @@
 import React from "react";
-import "./App.css";
+import "./styles/App.css";
 
-import SignIn from "./components/SignInComponent";
+import Main from "./components/MainComponent";
 
 function App() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <SignIn />
+      <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <Main />
       </header>
     </div>
   );
