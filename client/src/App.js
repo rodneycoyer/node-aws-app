@@ -1,26 +1,18 @@
 import React from "react";
-import logo from "./logo.svg";
-import axios from "axios";
 import "./App.css";
 
-function App() {
-  const [data, setData] = React.useState(null);
+import SignIn from "./components/SignInComponent";
 
-  React.useEffect(() => {
-    axios.get(`/users`)
-      .then((response) => {
-        setData(response.data)
-      })
-  }, []);
+function App() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p> {!data ? "is Loading..." : data} </p>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <SignIn />
       </header>
     </div>
   );
-}
+};
 
 export default App;
