@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 // render cards
+// list cards
 // create ListingID page
 
 function Listings() {

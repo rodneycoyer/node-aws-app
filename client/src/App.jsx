@@ -6,8 +6,8 @@ import Listings from "./components/ListingsComponent";
 import Users from "./components/UsersComponent";
 
 // todo:
-// nested routes - usersID, ListingsID
 // Layout template - UserProfile, UserTable, Listings, ListingID
+// nested routes - usersID, ListingsID
 // redirect to SignIn
 
 
