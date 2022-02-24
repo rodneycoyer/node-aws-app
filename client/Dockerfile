@@ -1,13 +1,23 @@
-# Use a lighter version of Node as a parent imageFrom mhart/alpine-node:8.11.4
+# imporves site performance
+ARG NODE_ENV=production
 
-# Set the working directory to /clientWORKDIR /client
+# Base image
+FROM node:14.18
 
-# copy package.json into the container at /clientCOPY package*.json /client/
+# non-root
+USER node
 
-# install dependenciesRUN npm install
+# Set the working directory
+WORKDIR /home/node
 
-# Copy the current directory contents into the container at /clientCOPY . /client/
+# Copy package.json into the container with wildcard
+COPY package*.json ./
 
-# Make port 3000 available to the world outside this containerEXPOSE 3000
+# Install dependencies
+RUN npm install
 
-# Run the app when the container launchesCMD ["npm", "start"]
+# Bundle App source contents into container
+COPY . .
+
+# Run the App
+CMD npm start
