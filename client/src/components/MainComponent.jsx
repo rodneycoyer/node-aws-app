@@ -1,14 +1,18 @@
-import React from "react";
+import React, { Children } from "react";
+import NavBar from "./NavBar/NavBarComponent";
 
 // convert to layout component wrapper
 // navBar
 // footer
 
-function MainComponent() {
+function Layout(props) {
 
   return (
-    <h1> Main Component </h1>
+    <React.Fragment>
+      <NavBar />
+        {props/children}
+    </React.Fragment>
   );
 }
 
-export default MainComponent;
+export default Layout;

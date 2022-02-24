@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import logo from "../styles/logo.svg";
+import NavBar from "./NavBar/NavBarComponent";
 
 
 // todo:
@@ -58,6 +59,8 @@ const SignIn = () => {
   });
 
   return (
+    <React.Fragment>
+      <NavBar />
     <Container component="main" maxWidth="sm">
       <img src={logo} className="App-logo" alt="logo" />
       <form onSubmit={formik.handleSubmit}>
@@ -141,7 +144,8 @@ const SignIn = () => {
           </Box>
         </form>
       <Copyright sx={{ mt: 6, mb: 8 }}/>
-    </Container>
+      </Container>
+      </React.Fragment>
   );
 };
 
