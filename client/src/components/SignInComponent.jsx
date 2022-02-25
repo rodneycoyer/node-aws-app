@@ -13,6 +13,8 @@ import * as yup from "yup";
 import logo from "../styles/logo.svg";
 import NavBar from "./NavBar/NavBarComponent";
 
+import Sidebar from "./SidebarComponent";
+
 
 // todo:
 // react form validation - email/password
@@ -61,6 +63,7 @@ const SignIn = () => {
   return (
     <React.Fragment>
       <NavBar />
+      <Sidebar />
     <Container component="main" maxWidth="sm">
       <img src={logo} className="App-logo" alt="logo" />
       <form onSubmit={formik.handleSubmit}>

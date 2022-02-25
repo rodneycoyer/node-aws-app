@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/App.css";
 import SignIn from "./components/SignInComponent";
-import Listings from "./components/ListingsComponent";
+import FeedPage from "./components/FeedPageComponent";
 import Users from "./components/UsersComponent";
 
 // todo:
@@ -24,10 +24,10 @@ function App() {
             <Route path="/users" element={<Users />}>
               <Route path=":userId" element={<Users />} />
             </Route>
-            <Route path="/listings" element={<Listings />}>
-              <Route path=":listingId" element={<Listings />} />
+            <Route path="/FeedPage" element={<FeedPage />}>
+              <Route path=":FeedPage" element={<FeedPage />} />
             </Route>
-            <Route path="*" element={ "*" ? <SignIn /> : <Listings /> } />
+            <Route path="*" element={ "*" ? <SignIn /> : <FeedPage /> } />
           </Routes>
         </BrowserRouter>
       </header>

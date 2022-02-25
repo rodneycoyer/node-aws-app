@@ -1,123 +1,103 @@
+import React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import Slide from "@mui/material/Slide";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Toolbar from "@mui/material/Toolbar";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+// icons
+import Avatar from "@mui/material/Avatar"
+import Badge from "@mui/material/Badge";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MessageIcon from "@mui/icons-material/Message";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import WorkIcon from "@mui/icons-material/Work";
 import logo from "./logo192.png"
 
-import React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Avatar from "@mui/material/Avatar"
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MessageIcon from '@mui/icons-material/Message';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import WorkIcon from '@mui/icons-material/Work';
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '40ch',
-    },
-  },
-}));
+const NavBarOptions = ({ Icon, avatar }) => {
+  return (
+    <IconButton>
+      {Icon && <Icon />}
+      {avatar && <Avatar />}
+    </IconButton>
+  );
+}
 
 function NavBar() {
-  const menuId = 'primary-search-account-menu';
+  const trigger = useScrollTrigger();
+
   return (
-    <Box sx={{ flexGrow: 1, width: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="small"
-            edge="start"
-            color="inherit"
-            aria-label="home button"
-            sx={{ mr: 2, ml: 5 }}
-          >
-            <img src={logo} alt="logo" width="40" />
-          </IconButton>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+    <Slide in={!trigger}>
+      <AppBar position="sticky" color="default">
+        <Container sx={{ flexGrow: 1, width: 1}}>
+          <Toolbar disableGutters>
+            <Link
+              to="/"
+              variant="button"
+            >
+              <IconButton
+                size="small"
+                edge="start"
+                color="inherit"
+                aria-label="home button"
+                sx={{ mr: 2, ml: 5 }}
+              >
+                <img src={logo} alt="react logo" width="40" />
+              </IconButton>
+            </Link>
+            <TextField
+              id="navbar-search"
+              label="search"
+              variant="outlined"
+              size="small"
+              sx={{ width: "20ch", mr: 5}}
+              inputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
-          </Search>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: "auto", mr: 5 }}>
-            <IconButton size="large" aria-label="show 6 new jobs" >
-              <Badge badgeContent={6} color="error">
-                <WorkIcon />
-              </Badge>
-            </IconButton>
-            <IconButton size="large" aria-label="show 2 new connections" >
-              <Badge badgeContent={2} color="error">
-                <SupervisorAccountIcon />
-              </Badge>
-            </IconButton>
-            <IconButton size="large" aria-label="show 4 new mails" >
-              <Badge badgeContent={4} color="error">
-                <MessageIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-        </Toolbar>
+            <Box sx={{ display: { md: 'flex' }, ml: "auto" }}>
+              <Stack direction="row" spacing={{ xs: 1, sm: 2, md: 3 }}>
+                <Badge badgeContent={2} overlap="circular" color="error">
+                  <NavBarOptions Icon={SupervisorAccountIcon} />
+                </Badge>
+                <Badge badgeContent={1} overlap="circular" color="error">
+                  <NavBarOptions Icon={WorkIcon} />
+                </Badge>
+                <Badge badgeContent={17} overlap="circular" color="error">
+                <NavBarOptions Icon={NotificationsIcon} />
+                </Badge>
+                <Badge badgeContent={5} overlap="circular" color="error">
+                  <NavBarOptions Icon={MessageIcon} />
+                </Badge>
+                <Badge
+                  variant="dot"
+                  overlap="circular"
+                  color="success"
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                >
+                  <NavBarOptions Icon={AccountCircle} />
+                </Badge>
+              </Stack>
+            </Box>
+          </Toolbar>
+        </Container>
       </AppBar>
-    </Box>
+    </Slide>
   );
 }
 
