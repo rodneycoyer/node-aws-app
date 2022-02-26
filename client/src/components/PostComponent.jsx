@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import Divider from "@mui/material/Divider";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -28,27 +28,27 @@ import logo from "../styles/logo.svg";
 // onClick event for modal form
 function CreatePost() {
   return (
-    <Card sx={{ maxWidth: 500 }}>
-      <CardHeader
-        avatar={
-          <Grid container direction="row" alignItems="center">
-            <Grid item xs={2}>
-              <IconButton>
-                <Avatar
-                  src={logo}
-                  alt={"avatar image"}
-                />
-              </IconButton>
-            </Grid>
-            <Grid item ml={1} sx={{ width: '30ch'}}>
-              <TextField multiline maxRows={3} variant="outlined" size="small" />
-            </Grid>
-        </Grid>
-        }
-        >
-      </CardHeader>
+    <Card sx={{ width: "35rem" }}>
+      <CardContent>
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <IconButton>
+            <Avatar
+              src={logo}
+              alt={"avatar image"}
+            />
+          </IconButton>
+          <TextField
+            label="create a post"
+            multiline
+            maxRows={3}
+            variant="outlined"
+            size="large"
+            sx={{ width: "28rem" }}
+          />
+        </Stack>
+      </CardContent>
       <CardActionArea sx={{ pt: 1, pb: 1 }}>
-        <Stack direction="row" spacing={1} justifyContent="center">
+        <Stack direction="row" spacing={1} justifyContent="space-around">
           <FooterOptions Icon={InsertPhotoOutlinedIcon} title="photo" color="primary" />
           <FooterOptions Icon={SmartDisplayIcon} title="video" color="success" />
           <FooterOptions Icon={InsertPhotoOutlinedIcon} title="event" color="warning" />
@@ -72,7 +72,7 @@ const FooterOptions = ({ Icon, title, color }) => {
 // render created post
 function RenderPost() {
   return (
-    <Card sx={{ maxWidth: 500 }}>
+    <Card sx={{ width: "35rem" }}>
       <CardHeader
         avatar={
           <Box sx={{ xs:3 }}>
