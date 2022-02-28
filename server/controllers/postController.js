@@ -6,11 +6,11 @@ exports.unsupported = (req, res) => {
   res.end("Operation not supported");
 };
 
-// get all posts
-exports.post_many = (req, req) => {
+// list posts
+exports.post_list = (req, res, next) => {
   Post.find()
     .then((posts) => {
-      resizeBy.statusCode = 200;
+      res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
       res.json(posts);
     })
@@ -18,7 +18,7 @@ exports.post_many = (req, req) => {
 };
 
 // get postId
-exports.post_findOne = (req, res) => {
+exports.post_findOne = (req, res, next) => {
   Post.findById(req.params.postId)
     .then(post => {
       res.statusCode = 200;
@@ -29,18 +29,19 @@ exports.post_findOne = (req, res) => {
 };
 
 // create postId
-exports.post_create = (req, res) => {
+exports.post_create = (req, res, next) => {
   Post.create(req.body)
     .then(post => {
       console.log("Post Created", post);
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
       res.json(post);
-    });
+    })
+    .catch(err => next(err));
 };
 
 // update postId
-exports.post_update = (req, res) => {
+exports.post_update = (req, res, next) => {
   Post.findByIdAndUpdate(req.params.postId,
     { $set: req.body },
     { new: true }
@@ -54,7 +55,7 @@ exports.post_update = (req, res) => {
 };
 
 // delete postId
-exports.post_deleteOne = (req, res) => {
+exports.post_deleteOne = (req, res, next) => {
   Post.findByIdAndDelete(req.params.postId)
     .then(response => {
       res.statusCode = 200;
