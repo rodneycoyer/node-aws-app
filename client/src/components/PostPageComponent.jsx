@@ -10,12 +10,12 @@ import Sidebar from "./SidebarComponent";
 // list cards
 // create ListingID page
 
-function FeedPage() {
+function PostPage() {
 
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(`/listings`)
+    axios.get(`/posts`)
       .then((response) => {
         setData(response.data)
       })
@@ -40,4 +40,4 @@ function FeedPage() {
   );
 }
 
-export default FeedPage;
+export default PostPage;

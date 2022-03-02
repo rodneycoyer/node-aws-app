@@ -1,15 +1,34 @@
 const Post = require("../models/postModel");
 
-// denied requests
+/*********************************
+ *          TOC
+ *  1. unsupported operation
+ *  2. get all posts
+ *  3. get postId
+ *  4. create post
+ *  5. update postId
+ *  6. delete all posts
+ *  7. delete postId
+ *
+ *********************************/
+
+/**
+ * 1. denied operation
+ */
+
 exports.unsupported = (req, res) => {
   res.statusCode = 403;
   res.end("Operation not supported");
 };
 
-// list posts
-exports.post_list = (req, res, next) => {
+/**
+ * 2. get all posts
+ */
+
+exports.get_all_posts = (req, res, next) => {
   Post.find()
-    .then((posts) => {
+    .populate("comments.author")
+    .then(posts => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
       res.json(posts);
@@ -17,9 +36,13 @@ exports.post_list = (req, res, next) => {
     .catch(err => next(err));
 };
 
-// get postId
-exports.post_findOne = (req, res, next) => {
+/**
+ * 3. get postId
+ */
+
+exports.get_postId = (req, res, next) => {
   Post.findById(req.params.postId)
+    .populate("comments.author")
     .then(post => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
@@ -28,8 +51,11 @@ exports.post_findOne = (req, res, next) => {
     .catch(err => next(err));
 };
 
-// create postId
-exports.post_create = (req, res, next) => {
+/**
+ * 4. create post
+ */
+
+exports.create_post = (req, res, next) => {
   Post.create(req.body)
     .then(post => {
       console.log("Post Created", post);
@@ -40,8 +66,12 @@ exports.post_create = (req, res, next) => {
     .catch(err => next(err));
 };
 
-// update postId
-exports.post_update = (req, res, next) => {
+
+/**
+ * 5. update postId
+ */
+
+exports.update_postId = (req, res, next) => {
   Post.findByIdAndUpdate(req.params.postId,
     { $set: req.body },
     { new: true }
@@ -54,9 +84,12 @@ exports.post_update = (req, res, next) => {
     .catch(err => next(err));
 };
 
-// delete postId
-exports.post_deleteOne = (req, res, next) => {
-  Post.findByIdAndDelete(req.params.postId)
+/**
+ * 6. delete all posts
+ */
+
+exports.delete_all_posts = (req, res, next) => {
+  Post.deleteMany()
     .then(response => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
@@ -66,4 +99,16 @@ exports.post_deleteOne = (req, res, next) => {
 }
 
 
+/**
+ * 7. delete postId
+ */
 
+exports.delete_postId = (req, res, next) => {
+  Post.findByIdAndDelete(req.params.postId)
+    .then(response => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json(response);
+    })
+    .catch(err => next(err));
+};

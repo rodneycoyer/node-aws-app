@@ -28,7 +28,7 @@ import logo from "../styles/logo.svg";
 // onClick event for modal form
 function CreatePost() {
   return (
-    <Card sx={{ width: "35rem" }}>
+    <Card sx={{ width: "150" }}>
       <CardContent>
         <Stack direction="row" alignItems="center" spacing={1}>
           <IconButton>
@@ -72,7 +72,7 @@ const FooterOptions = ({ Icon, title, color }) => {
 // render created post
 function RenderPost() {
   return (
-    <Card sx={{ width: "35rem" }}>
+    <Card sx={{ width: "150" }}>
       <CardHeader
         avatar={
           <Box sx={{ xs:3 }}>

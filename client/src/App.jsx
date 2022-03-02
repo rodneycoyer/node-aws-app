@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/App.css";
 import SignIn from "./components/SignInComponent";
-import FeedPage from "./components/FeedPageComponent";
+import PostPage from "./components/PostPageComponent";
 import Users from "./components/UsersComponent";
 
 // todo:
@@ -24,10 +24,10 @@ function App() {
             <Route path="/users" element={<Users />}>
               <Route path=":userId" element={<Users />} />
             </Route>
-            <Route path="/FeedPage" element={<FeedPage />}>
-              <Route path=":FeedPage" element={<FeedPage />} />
+            <Route path="/posts" element={<PostPage />}>
+              <Route path=":posts" element={<PostPage />} />
             </Route>
-            <Route path="*" element={ "*" ? <SignIn /> : <FeedPage /> } />
+            <Route path="*" element={ "*" ? <SignIn /> : <PostPage /> } />
           </Routes>
         </BrowserRouter>
       </header>

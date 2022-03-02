@@ -1,43 +1,21 @@
 const express = require("express");
 const postController = require("../controllers/postController");
-const authenticate = require("../authenticate");
+const auth = require("../authenticate");
 
 const postRouter = express.Router();
 
-//
-//posts
-//
+// posts
 postRouter.route("/")
-  .get(authenticate.verify_user, postController.post_list)
-  .post(authenticate.verify_user, postController.post_create)
-  .put(authenticate.verify_user, postController.unsupported)
-  .delete(authenticate.verify_user, postController.unsupported);
+  .get(postController.get_all_posts)
+  .post(postController.create_post)
+  .put(postController.unsupported)
+  .delete(postController.delete_all_posts);
 
-//
-// postId
-//
-postRouter.route("/:id")
-  .get(authenticate.verify_user, postController.post_findOne)
-  .post(authenticate.verify_user, postController.unsupported)
-  .put(authenticate.verify_user, postController.post_update)
-  .delete(authenticate.verify_user, postController.post_deleteOne);
-
-//
-// post comments
-//
-postRouter.route("/:feedId/comments")
-  .get(authenticate.verify_user,)
-  .post(authenticate.verify_user,)
-  .put(authenticate.verify_user,)
-  .delete(authenticate.verify_user,);
-
-  //
-  // post comment id
-  //
-  postRouter.route("/:feedId/comments/:commentId")
-  .get(authenticate.verify_user,)
-  .post(authenticate.verify_user,)
-  .put(authenticate.verify_user,)
-  .delete(authenticate.verify_user,);
+// posts/:postId
+postRouter.route("/:postId")
+  .get(postController.get_postId) //
+  .post(postController.unsupported)
+  .put(postController.update_postId)
+  .delete(postController.delete_postId);
 
 module.exports = postRouter;

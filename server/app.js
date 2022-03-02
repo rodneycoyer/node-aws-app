@@ -9,8 +9,9 @@ const passport = require("passport");
 
 // import routes
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/userRoutes");
+const userRouter = require("./routes/userRoutes");
 const postRouter = require("./routes/postRouter");
+const commentRouter = require("./routes/commentRouter");
 
 // connect to DB
 const uri = process.env.MONGO_URI;
@@ -27,12 +28,12 @@ connect.then(() => console.log(
 
 const app = express(); // launch express app
 
-app.use(cors()); // enable CORS
-app.use(logger("dev")); // dev only
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
+
+app.use(cors()); // enable CORS
+app.use(logger("dev")); // dev only
 
 // parse json. key values stored in req.params
 app.use(express.json());
@@ -42,13 +43,17 @@ app.use(express.urlencoded({ extended: false }));
 // initialize passport
 app.use(passport.initialize());
 
+// no-auth routes
+app.use("/", indexRouter);
+
 // change to serve PRODUCTION BUILD FILES
 app.use(express.static(path.join(__dirname, "public")));
 
 // route handlers
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/feed", postRouter);
+app.use("/users", userRouter);
+app.use("/posts", postRouter);
+app.use("/comments", commentRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
