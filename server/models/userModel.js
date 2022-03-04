@@ -19,6 +19,10 @@ const userSchema = new Schema({
     type: String,
     default: ""
   },
+  posts: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post"
+  },
   admin: {
     type: Boolean,
     default: false

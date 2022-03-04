@@ -19,7 +19,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import WorkIcon from "@mui/icons-material/Work";
-import logo from "./logo192.png"
+import logo from "./logo192.png";
 
 
 const NavBarOptions = ({ Icon, avatar }) => {
@@ -60,7 +60,7 @@ function NavBar() {
               size="small"
               sx={{ width: "20ch", mr: 5}}
               inputProps={{
-                startAdornment: (
+                startadornment: (
                   <InputAdornment position="end">
                     <SearchIcon />
                   </InputAdornment>
@@ -90,7 +90,7 @@ function NavBar() {
                     horizontal: 'right',
                   }}
                 >
-                  <NavBarOptions Icon={AccountCircle} />
+                <NavBarOptions Icon={AccountCircle} />
                 </Badge>
               </Stack>
             </Box>

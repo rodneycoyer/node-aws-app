@@ -26,7 +26,7 @@ exports.unsupported = (req, res) => {
  */
 
 exports.get_all_posts = (req, res, next) => {
-  Post.find()
+  Post.find({})
     .populate("comments.author")
     .then(posts => {
       res.statusCode = 200;
