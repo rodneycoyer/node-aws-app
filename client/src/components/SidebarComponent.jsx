@@ -12,30 +12,28 @@ import logo from "../styles/logo.svg";
 
 function RenderUserCard() {
   return (
-    <Card sx={{ maxWidth: "20rem" }}>
+    <Card sx={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <CardMedia
         component={"img"}
         image={logo}
         alt="react logo"
         sx={{
-          position: "relative",
-          mb: "3rem",
-          height: "5rem"
+          mb: "4rem",
+          height: "7rem"
         }}
       />
-      <Box
+      <Avatar
+        alt="react logo"
+        src="../components/NavBar/logo192.png"
         sx={{
+          width: 90,
+          height: 90,
+          border: '0.1em solid lightGray',
           position: "absolute",
-          ml: "7.25rem",
-          mt: "-6rem",
+          margin: "auto",
+          top: "15%"
         }}
-      >
-        <Avatar
-          alt="react logo"
-          src="../components/NavBar/logo192.png"
-          sx={{ width: 90, height: 90, border: '0.1em solid lightGray' }}
-        />
-      </Box>
+      />
       <CardContent>
         <Stack spacing={2} direction="column">
           <Box>
@@ -74,7 +72,7 @@ function RenderUserCard() {
 
 function RenderDiscoverMoreCard() {
   return (
-    <Card sx={{ maxWidth: "20rem"}}>
+    <Card sx={{ }}>
       <CardContent>
         <Typography variant="body2"> Discover More </Typography>
       </CardContent>

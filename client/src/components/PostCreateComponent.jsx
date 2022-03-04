@@ -61,7 +61,7 @@ function CreateNewPost(props) {
   }
 
   return (
-    <Card>
+    <Card sx={{pt: 3}}>
       <CardContent>
         <Stack direction="row" alignItems="center" spacing={1}>
           <IconButton>
