@@ -10,7 +10,6 @@ import PostFeedCard from "./PostCardComponent";
 
 // todo
 // create ListingID page
-// onClick event for modal form
 // error and loading handling
 
 /**
@@ -27,7 +26,7 @@ function PostPage() {
       .then(response => {
         setPostApi(response.data)
       })
-      .catch(err => console.log(err));
+      .catch(err => alert(err));
   }, []);
 
   if (!postApi) return "no posts to show";
@@ -51,12 +50,12 @@ function PostPage() {
     <React.Fragment>
       <NavBar />
       <Container maxWidth="lg">
-        <Grid container spacing={2} mt={3}>
+        <Grid container spacing={2} mt={3} >
           <Grid item sm={4}>
             <Sidebar />
           </Grid>
-          <Grid item sm={7}>
-            <CreateNewPost />
+          <Grid item sm={8} md={7}>
+            <CreateNewPost/>
             {postListDirectory}
           </Grid>
         </Grid>

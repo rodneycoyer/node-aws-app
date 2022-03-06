@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import logo from "../styles/logo.svg";
+import axios from "axios";
 
 
 // todo:
@@ -31,6 +32,39 @@ function Copyright(props) {
 
 const SignIn = () => {
 
+  const [formValue, setFormValue] = useState({
+    password: "",
+    username: "",
+  });
+
+  const handleFormChange = (event) => {
+    event.preventDefault();
+    setFormValue({
+      ...formValue,
+      [event.target.name]: event.target.value
+    });
+  }
+
+  // redirect to posts page
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const loginFieldData = new FormData();
+    loginFieldData.append("username", formValue.username)
+    loginFieldData.append("password", formValue.password)
+
+    const login = {
+      username: formValue.username,
+      password: formValue.password,
+    }
+    axios.post(`/users/login`, login)
+      .then(response => {
+        console.log(response.data.status)
+        window.location.href = "/posts"
+      })
+      .catch(err => alert(err));
+  }
+
   return (
     <Container component="main" maxWidth="md" align="center">
       <img src={logo} className="App-logo" alt="logo" width={500} />
@@ -46,26 +80,31 @@ const SignIn = () => {
         >
           <Typography component="h1" variant="h4" mb={4}> Sign-in or Register </Typography>
           <TextField
-            id="email"
-            name="email"
-            label="email"
-            variant="filled"
+            id="username"
+            name="username"
+            label="username"
+            variant="outlined"
             autoFocus
             required
+            value={formValue.username}
+            onChange={handleFormChange}
           />
           <TextField
             id="password"
             name="password"
             label="password"
-            variant="filled"
+            variant="outlined"
             type="password"
             required
+            value={formValue.password}
+            onChange={handleFormChange}
           />
           <Stack direction="row" spacing={1}>
             <Button
               color="error"
               variant="outlined"
               fullWidth
+              size="large"
             >
               register
             </Button>
@@ -73,7 +112,9 @@ const SignIn = () => {
               color="error"
               variant="outlined"
               fullWidth
-              type="submit"
+              size="large"
+            type="submit"
+            onClick={handleLogin}
             >
               sign in
             </Button>
@@ -89,6 +130,7 @@ const SignIn = () => {
               variant="contained"
               color="warning"
               fullWidth
+              sx={{ pb: 2, pt: 2, borderRadius: "25px"}}
             >
               Login with Google
             </Button>

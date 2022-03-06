@@ -82,12 +82,10 @@ function RenderDiscoverMoreCard() {
 
 function Sidebar() {
   return (
-    <React.Fragment>
-      <Stack spacing={2}>
-        <RenderUserCard />
-        <RenderDiscoverMoreCard />
-      </Stack>
-    </React.Fragment>
+    <Stack spacing={2}>
+      <RenderUserCard />
+      <RenderDiscoverMoreCard />
+    </Stack>
   );
 }
 

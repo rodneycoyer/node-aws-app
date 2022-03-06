@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/App.css";
-import SignIn from "./components/SignInComponent";
-import PostPage from "./components/PostPageComponent";
-import Users from "./components/UsersComponent";
+import SignIn from "./components/SignInPage";
+import PostPage from "./components/PostPage";
+import Register from "./components/RegisterComponent";
+import Users from "./components/UsersPage";
 
 // todo:
 // Layout template - UserProfile, UserTable, Listings, ListingID
@@ -20,7 +21,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<SignIn />} />
-            <Route path="/register" />
+            <Route path="/register" element={<Register />} />
             <Route path="/users" element={<Users />}>
               <Route path=":userId" element={<Users />} />
             </Route>

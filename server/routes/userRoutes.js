@@ -16,14 +16,14 @@ UserRouter.post("/signup", userController.create_new_user);
 
 // users
 UserRouter.route("/")
-  .get(authenticate.verify_user, userController.get_all_users)
+  .get(userController.get_all_users)
   .post(authenticate.verify_user, userController.unsupported)
   .put(authenticate.verify_user, userController.unsupported)
   .delete(authenticate.verify_user, userController.unsupported);
 
 // users/:userId
 UserRouter.route("/:id")
-  .get(authenticate.verify_user, userController.get_userId)
+  .get(userController.get_userId)
   .post(authenticate.verify_user, userController.unsupported)
   .put(authenticate.verify_user, userController.update_userId)
   .delete(authenticate.verify_user, userController.delete_userId);
