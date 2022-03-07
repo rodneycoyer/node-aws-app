@@ -1,9 +1,12 @@
+import { userSlice } from "./userSlice";
+import { postSlice } from "./postSlice";
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./userReducer";
 
-// create store and manage reducer actions
-export default configureStore({
+const store = configureStore({
   reducer: {
-    user: userReducer
+    userSliceReducer: userSlice.reducer,
+    postSliceReducer: postSlice.reducer
   },
 });
+
+export default store;

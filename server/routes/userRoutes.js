@@ -12,7 +12,7 @@ UserRouter.post("/login", passport.authenticate("local"), userController.user_lo
 UserRouter.get("/logout", userController.user_logout);
 
 // create new user
-UserRouter.post("/signup", userController.create_new_user);
+UserRouter.post("/register", userController.create_new_user);
 
 // users
 UserRouter.route("/")
