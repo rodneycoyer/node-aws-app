@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -11,11 +9,9 @@ import Typography from "@mui/material/Typography";
 import logo from "../styles/logo.svg";
 import axios from "axios";
 
-
 // todo:
 // return success or error messages
 // redirect to sign-in
-
 
 function Copyright(props) {
   return (
@@ -34,7 +30,6 @@ function Copyright(props) {
 
 function Register() {
 
-  // textField state
   const [formValue, setFormValue] = useState({
     firstname: "",
     lastname: "",
@@ -52,11 +47,10 @@ function Register() {
     });
   }
 
-  // post user registration
+  // register new user
   const handleRegister = (event) => {
     event.preventDefault();
-
-    // key pair values
+    // store key pairs
     const loginFieldData = new FormData();
     loginFieldData.append("firstname", formValue.firstname);
     loginFieldData.append("lastname", formValue.lastname);
@@ -70,16 +64,19 @@ function Register() {
       lastname: formValue.lastname,
       email: formValue.email,
       username: formValue.username,
-      password: formValue.password,
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
+      password: formValue.password
     }
-    axios.post(`/users/signup`, userToRegister)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(err => console.log(err));
+    // POST method to server
+    axios({
+      method: "POST",
+      data: userToRegister,
+      url: `/users/signup`,
+    })
+    .then(response => {
+      alert(response.data.status);
+      window.location.href = "/login"
+    })
+    .catch(err => alert(err));
   }
 
   return (

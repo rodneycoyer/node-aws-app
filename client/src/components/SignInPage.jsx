@@ -13,9 +13,6 @@ import axios from "axios";
 
 
 // todo:
-// react form validation - email/password
-// handle sign-in
-// handle registration
 // handle OAuth
 // handle forgot password
 
@@ -45,24 +42,29 @@ const SignIn = () => {
     });
   }
 
-  // redirect to posts page
+  // login
   const handleLogin = (event) => {
     event.preventDefault();
-
+    // store key pairs
     const loginFieldData = new FormData();
     loginFieldData.append("username", formValue.username)
     loginFieldData.append("password", formValue.password)
-
+    // login payload
     const login = {
       username: formValue.username,
       password: formValue.password,
     }
-    axios.post(`/users/login`, login)
-      .then(response => {
-        console.log(response.data.status)
-        window.location.href = "/posts"
-      })
-      .catch(err => alert(err));
+    // POST method to server
+    axios({
+      method: "POST",
+      data: login,
+      url: `/users/login`
+    })
+    .then(response => {
+      console.log(response.data.status);
+      window.location.href = "/posts"
+    })
+    .catch(err => alert(err));
   }
 
   return (
@@ -105,6 +107,7 @@ const SignIn = () => {
               variant="outlined"
               fullWidth
               size="large"
+              href={"/register"}
             >
               register
             </Button>
@@ -113,8 +116,8 @@ const SignIn = () => {
               variant="outlined"
               fullWidth
               size="large"
-            type="submit"
-            onClick={handleLogin}
+              type="submit"
+              onClick={handleLogin}
             >
               sign in
             </Button>

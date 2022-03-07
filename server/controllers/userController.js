@@ -83,7 +83,7 @@ exports.create_new_user = (req, res) => {
           passport.authenticate("local")(req, res, () => {
             res.statusCode = 200;
             res.setHeader("Content-Type", "application/json");
-            res.json({ success: true, status: "Success!! You are Registered!" });
+            res.json({ success: true, status: "Registration was a Success!!" });
           });
         });
       }
