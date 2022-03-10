@@ -32,9 +32,10 @@ exports.unsupported = (req, res) => {
 
 exports.user_login = (req, res) => {
   const token = authenticate.get_jwt({ _id: req.user._id })
+  console.log(req.user)
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  res.json({ success: true, token: token, status: "You are successfully logged in!!" })
+  res.json({ success: true, token: token, status: "You are successfully logged in!!", user: req.user._id })
 };
 
 /**

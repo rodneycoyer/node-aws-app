@@ -25,30 +25,34 @@ exports.unsupported = (req, res) => {
  * 2. get all comments
  */
 
-exports.get_all_comments = (req, res, next) => {
-  Comment.find()
-    .populate("author")
-    .then(comment => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(comment);
-    })
-    .catch(err => next(err));
+exports.get_all_comments = async (req, res, next) => {
+  try {
+    const getAllCommentsPromise = Comment.find().populate("author");
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await getAllCommentsPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**
  * 3. get commentId
  */
 
-exports.get_commentId = (req, res) => {
-  Comment.findById(req.params.commentId)
-    .populate("author")
-    .then(comment => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(comment);
-    })
-    .catch(err => next(err));
+exports.get_commentId = async (req, res) => {
+  try {
+    const getCommentIdPromise = Comment
+      .findById(req.params.commentId)
+      .populate("author");
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await getCommentIdPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**

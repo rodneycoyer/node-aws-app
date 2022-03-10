@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -54,15 +52,18 @@ const SignIn = () => {
       username: formValue.username,
       password: formValue.password,
     }
-    // POST method to server
+    // POST method --> passport local strategy
     axios({
       method: "POST",
       data: login,
       url: `/users/login`
     })
     .then(response => {
-      console.log(response.data.status);
-      window.location.href = "/posts"
+      console.log(response);
+      const token = response.data.token;
+      const success = response.data.success;
+      const user = response.data.user
+      alert(user);
     })
     .catch(err => alert(err));
   }
@@ -101,50 +102,43 @@ const SignIn = () => {
             value={formValue.password}
             onChange={handleFormChange}
           />
-          <Stack direction="row" spacing={1}>
-            <Button
-              color="error"
-              variant="outlined"
-              fullWidth
-              size="large"
-              href={"/register"}
-            >
-              register
-            </Button>
-            <Button
-              color="error"
-              variant="outlined"
-              fullWidth
-              size="large"
-              type="submit"
-              onClick={handleLogin}
-            >
-              sign in
-            </Button>
-          </Stack>
-          <Divider>
-            <Typography variant="h5">
-              OAuth 2.0 with Google
-            </Typography>
-          </Divider>
-          <Box>
-            <Button
-              size="large"
-              variant="contained"
-              color="warning"
-              fullWidth
-              sx={{ pb: 2, pt: 2, borderRadius: "25px"}}
-            >
-              Login with Google
-            </Button>
-          </Box>
-          <Grid container>
-            <Grid item xs>
+          <Stack spacing={3}>
+              <Button
+                color="info"
+                variant="contained"
+                fullWidth
+                size="large"
+                type="submit"
+                onClick={handleLogin}
+                sx={{ pb: 2, pt: 2, borderRadius: "25px"}}
+              >
+                sign in
+              </Button>
+              <Button
+                size="large"
+                variant="contained"
+                color="warning"
+                fullWidth
+                sx={{ pb: 2, pt: 2, borderRadius: "25px"}}
+              >
+                sign in with google
+              </Button>
+              <Button
+                color="success"
+                variant="contained"
+                fullWidth
+                size="large"
+                href={"/register"}
+                sx={{ pb: 2, pt: 2, borderRadius: "25px"}}
+              >
+                register here
+              </Button>
+            </Stack>
+            <Box sx={{ pt: 8 }}>
               <Link href="#" variant="body2" underline="none">
                 Forgot password?
               </Link>
-            </Grid>
-          </Grid>
+            </Box>
           </Box>
       <Copyright sx={{ mt: 6, mb: 8 }}/>
     </Container>

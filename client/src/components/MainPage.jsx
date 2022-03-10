@@ -21,6 +21,7 @@ import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 
 import PostFeedCard from "./PostCardComponent";
+import Layout from "./LayoutComponent";
 
 // todo
 // create ListingID page
@@ -29,9 +30,9 @@ import PostFeedCard from "./PostCardComponent";
 // cardActionArea buttons
 function FooterOptions({ Icon, title, color, clickEvent }) {
   return (
-    <Button color={color} onClick={clickEvent}>
+    <Button color={color} onClick={clickEvent} >
       {Icon && <Icon />}
-      <Typography variant="button" color="text.primary" ml={1}> {title} </Typography>
+      <Typography color="text.primary" ml={1}> {title} </Typography>
     </Button>
   );
 }
@@ -45,6 +46,7 @@ function PostPage(props) {
   const [postApi, setPostApi] = useState([]);
   // create post state
   const [input, setInput] = useState("");
+
   const handleChange = (event) => {
     event.preventDefault();
     setInput(event.target.value);
@@ -77,9 +79,9 @@ function PostPage(props) {
   // create new post
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    // form key pairs
     const textFieldData = new FormData();
-    textFieldData.append("text", input) // key pairs
+    textFieldData.append("text", input)
     // add other pairs here
 
     const postContent = {
@@ -92,15 +94,14 @@ function PostPage(props) {
     axios.post(`/posts`, postContent)
       .then(response => {
         console.log(response);
-        setPostApi([...postApi, response.data])
+        setPostApi([response.data, ...postApi])
         setInput("")
       })
       .catch(err => alert(err));
   }
 
   return (
-    <React.Fragment>
-      <NavBar />
+    <Layout>
       <Container maxWidth="lg">
         <Grid container spacing={2} mt={3} >
           <Grid item sm={4}>
@@ -139,19 +140,19 @@ function PostPage(props) {
               </CardContent>
               <CardActionArea sx={{ pt: 1, pb: 1 }}>
                 <Stack direction="row" spacing={1} justifyContent="space-around">
-                  <FooterOptions Icon={InsertPhotoOutlinedIcon} title="photo" color="primary" />
-                  <FooterOptions Icon={SmartDisplayIcon} title="video" color="success" />
-                  <FooterOptions Icon={InsertPhotoOutlinedIcon} title="event" color="warning" />
-                  <FooterOptions Icon={CreateIcon} title="Post" color="error" clickEvent={handleSubmit}/>
+                  <FooterOptions Icon={InsertPhotoOutlinedIcon} title="photo" aria-label="upload-photo" color="primary" />
+                  <FooterOptions Icon={SmartDisplayIcon} title="video" aria-label="upload-video" color="success" />
+                  <FooterOptions Icon={InsertPhotoOutlinedIcon} title="event" aria-label="create-event" color="warning" />
+                  <FooterOptions Icon={CreateIcon} title="Post" color="error" aria-label="submit-post" clickEvent={handleSubmit}/>
                 </Stack>
               </CardActionArea>
             </Card>
-
+            {/* render posts */}
             {postListDirectory}
           </Grid>
         </Grid>
       </Container>
-    </React.Fragment>
+    </Layout>
   );
 }
 
