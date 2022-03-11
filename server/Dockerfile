@@ -5,15 +5,15 @@ ARG NODE_ENV=production
 FROM node:14.18
 
 # Set the working directory
-WORKDIR /home/node
+WORKDIR /usr/src/app
 
-# Copy package.json into the container with wildcard
+# Copy package.json with wildcard
 COPY --chown=node:node package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --silent
 
-# Bundle app source contents into the container
+# Bundle app source contents inside image
 COPY --chown=node:node . .
 
 # Run the app

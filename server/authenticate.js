@@ -15,7 +15,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // generate jwt
 exports.get_jwt = user => {
-  return jwt.sign(user, process.env.SECRET_KEY, { expiresIn: 3600 });
+  return jwt.sign(user, process.env.SECRET_KEY, { expiresIn: 3600 }); // 1hr
 };
 
 // expect jwt in header

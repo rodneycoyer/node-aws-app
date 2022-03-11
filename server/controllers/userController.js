@@ -1,6 +1,6 @@
 const User = require("../models/userModel");
 const passport = require("passport");
-const authenticate = require("../authenticate");
+const auth = require("../authenticate");
 
 /*********************************
  *          TOC
@@ -30,12 +30,12 @@ exports.unsupported = (req, res) => {
  * 2. login
  */
 
-exports.user_login = (req, res) => {
-  const token = authenticate.get_jwt({ _id: req.user._id })
-  console.log(req.user)
+exports.user_login = async (req, res) => {
+  const token = await auth.get_jwt({ _id: req.user._id });
+  const user = req.user;
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  res.json({ success: true, token: token, status: "You are successfully logged in!!", user: req.user._id })
+  res.json({ user: user.firstname, success: true, token: token, status: "You are successfully logged in!!"})
 };
 
 /**
@@ -96,57 +96,67 @@ exports.create_new_user = (req, res) => {
  * 5. get all users
  */
 
-exports.get_all_users = (req, res, next) => {
-  User.find()
-    .then((users) => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(users)
-    })
-    .catch(err => next(err));
+exports.get_all_users = async (req, res, next) => {
+  try {
+    const getAllUsersPromise = User.find();
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await getAllUsersPromise);
+    console.log( await getAllUsersPromise)
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**
  * 6. get userId
  */
 
-exports.get_userId = (req, res, next) => {
-  User.findById(req.params.userId)
-    .then(user => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(user);
-    })
-    .catch(err => next(err));
+exports.get_userId = async (req, res, next) => {
+  try {
+    const getUserIdPromise = User.findById(req.params.userId);
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await getUserIdPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**
  * 7. update userId
  */
 
-exports.update_userId = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.userId,
-    { set: req.body },
-    { new: true }
-  )
-    .then((user) => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(user);
-    })
-    .catch(err => next(err));
+exports.update_userId = async (req, res, next) => {
+  try {
+    const updateUserIdPromise = User.findByIdAndUpdate(
+      req.params.userId,
+      { set: req.body },
+      { new: true }
+    );
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await updateUserIdPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**
  * 8. delete userId
  */
 
-exports.delete_userId = (req, res, next) => {
-  User.findByIdAndDelete(req.params.userId)
-    .then((response) => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(response);
-    })
-    .catch(err => next(err));
+exports.delete_userId = async (req, res, next) => {
+  try {
+    const deleteUserIdPromise = User.findByIdAndDelete(req.params.userId);
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await deleteUserIdPromise.response);
+  }
+  catch (err) {
+    next(err);
+  }
 };

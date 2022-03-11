@@ -60,10 +60,7 @@ const SignIn = () => {
     })
     .then(response => {
       console.log(response);
-      const token = response.data.token;
-      const success = response.data.success;
-      const user = response.data.user
-      alert(user);
+      alert(response.data.user);
     })
     .catch(err => alert(err));
   }

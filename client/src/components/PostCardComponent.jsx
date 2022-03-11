@@ -37,7 +37,7 @@ function PostFeedCard(props) {
           <Box sx={{ xs:3 }}>
             <IconButton>
               <Avatar
-                src={props.userImage}
+                src={props.username}
                 alt={props.username}
               />
             </IconButton>

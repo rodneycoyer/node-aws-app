@@ -6,16 +6,16 @@ const commentRouter = express.Router();
 
 // comments
 commentRouter.route("/")
-  .get(commentController.get_all_comments)
-  .post(commentController.create_comment)
-  .put(commentController.unsupported)
-  .delete(commentController.delete_all_comments);
+  .get(commentController.get_all_comments, auth.verify_user)
+  .post(commentController.create_comment, auth.verify_user)
+  .put(commentController.unsupported, auth.verify_user)
+  .delete(commentController.delete_all_comments, auth.verify_user);
 
 // comments/:commentId
 commentRouter.route("/:commentId")
-  .get(commentController.get_commentId)
-  .post(commentController.unsupported)
-  .put(commentController.update_commentId)
-  .delete(commentController.delete_commentId);
+  .get(commentController.get_commentId, auth.verify_user)
+  .post(commentController.unsupported, auth.verify_user)
+  .put(commentController.update_commentId, auth.verify_user)
+  .delete(commentController.delete_commentId, auth.verify_user);
 
 module.exports = commentRouter;

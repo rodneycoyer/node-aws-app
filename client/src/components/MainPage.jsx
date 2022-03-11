@@ -7,7 +7,6 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import NavBar from "./NavBarComponent";
 import Sidebar from "./SidebarComponent";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -43,7 +42,7 @@ function FooterOptions({ Icon, title, color, clickEvent }) {
 
 function PostPage(props) {
   // set data
-  const [postApi, setPostApi] = useState([]);
+  const [posts, setPosts] = useState([]);
   // create post state
   const [input, setInput] = useState("");
 
@@ -56,21 +55,21 @@ function PostPage(props) {
   useEffect(() => {
     axios.get(`/posts`)
       .then(response => {
-        setPostApi(response.data)
+        setPosts(response.data)
+        console.log(response)
       })
       .catch(err => alert(err));
   }, []);
 
   // list posts
-  const postListDirectory = postApi.map(postApi => {
+  const postListDirectory = posts.map(posts => {
     return (
-      <Grid item mt={2} key={postApi._id}>
+      <Grid item mt={2} key={posts._id}>
         <PostFeedCard
-          username={postApi._id}
-          title={postApi.title}
-          text={postApi.text}
-          media={postApi.media}
-          subheader={postApi.userInfo}
+          username={posts._id}
+          text={posts.text}
+          media={posts.media}
+          subheader={posts.userInfo}
         />
       </Grid>
     );
@@ -94,7 +93,7 @@ function PostPage(props) {
     axios.post(`/posts`, postContent)
       .then(response => {
         console.log(response);
-        setPostApi([response.data, ...postApi])
+        setPosts([response.data, ...posts])
         setInput("")
       })
       .catch(err => alert(err));

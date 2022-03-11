@@ -41,7 +41,7 @@ exports.get_all_comments = async (req, res, next) => {
  * 3. get commentId
  */
 
-exports.get_commentId = async (req, res) => {
+exports.get_commentId = async (req, res, next) => {
   try {
     const getCommentIdPromise = Comment
       .findById(req.params.commentId)

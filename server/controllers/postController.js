@@ -25,90 +25,106 @@ exports.unsupported = (req, res) => {
  * 2. get all posts
  */
 
-exports.get_all_posts = (req, res, next) => {
-  Post.find().sort({ "_id": -1 })
-    .populate("comments.author")
-    .then(posts => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(posts);
-    })
-    .catch(err => next(err));
+exports.get_all_posts = async (req, res, next) => {
+  try {
+    const getAllPostsPromise = Post.find()
+      .sort({ "_id": -1 })
+      .populate("comments.author");
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await getAllPostsPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**
  * 3. get postId
  */
 
-exports.get_postId = (req, res, next) => {
-  Post.findById(req.params.postId)
-    .populate("comments.author")
-    .then(post => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(post);
-    })
-    .catch(err => next(err));
+exports.get_postId = async (req, res, next) => {
+  try {
+    const getPostIdPromise = Post
+      .findById(req.params.postId)
+      .populate("comments.author");
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await getPostIdPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**
  * 4. create post
  */
 
-exports.create_post = (req, res, next) => {
-  Post.create(req.body)
-    .then(post => {
-      console.log("Post Created", post);
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(post);
-    })
-    .catch(err => next(err));
+exports.create_post = async (req, res, next) => {
+  try {
+    const createNewPostPromise = await Post.create(req.body);
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(createNewPostPromise);
+    console.log("Post Created", createNewPostPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };
-
 
 /**
  * 5. update postId
  */
 
-exports.update_postId = (req, res, next) => {
-  Post.findByIdAndUpdate(req.params.postId,
-    { $set: req.body },
-    { new: true }
-  )
-    .then(post => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(post);
-    })
-    .catch(err => next(err));
+exports.update_postId = async (req, res, next) => {
+  try {
+    const updatePostIdPromise = Post.findByIdAndUpdate(
+      req.params.postId,
+      { $set: req.body },
+      { new: true }
+    );
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await updatePostIdPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };
 
 /**
  * 6. delete all posts
  */
 
-exports.delete_all_posts = (req, res, next) => {
-  Post.deleteMany()
-    .then(response => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(response);
-    })
-    .catch(err => next(err));
-}
+exports.delete_all_posts = async (req, res, next) => {
+  try {
+    const deleteAllPostsPromise = Post.deleteMany();
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await deleteAllPostsPromise);
+  }
+  catch (err) {
+    next(err);
+  }
+};
 
 
 /**
  * 7. delete postId
  */
 
-exports.delete_postId = (req, res, next) => {
-  Post.findByIdAndDelete(req.params.postId)
-    .then(response => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(response);
-    })
-    .catch(err => next(err));
+exports.delete_postId = async (req, res, next) => {
+  try {
+    const deletePostIdPromise = Post.findByIdAndDelete(
+      req.params.postId
+    );
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(await deletePostIdPromise);
+  }
+  catch (err) {
+    next(err);
+  }
 };

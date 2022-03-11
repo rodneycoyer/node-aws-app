@@ -6,16 +6,16 @@ const postRouter = express.Router();
 
 // posts
 postRouter.route("/")
-  .get(postController.get_all_posts)
-  .post(postController.create_post)
-  .put(postController.unsupported)
-  .delete(postController.delete_all_posts);
+  .get(postController.get_all_posts, auth.verify_user)
+  .post(postController.create_post, auth.verify_user)
+  .put(postController.unsupported, auth.verify_user)
+  .delete(postController.delete_all_posts, auth.verify_user);
 
 // posts/:postId
 postRouter.route("/:postId")
-  .get(postController.get_postId) //
-  .post(postController.unsupported)
-  .put(postController.update_postId)
-  .delete(postController.delete_postId);
+  .get(postController.get_postId, auth.verify_user) //
+  .post(postController.unsupported, auth.verify_user)
+  .put(postController.update_postId, auth.verify_user)
+  .delete(postController.delete_postId, auth.verify_user);
 
 module.exports = postRouter;
