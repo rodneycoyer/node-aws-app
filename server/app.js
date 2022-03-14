@@ -8,7 +8,6 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 // import routes
-const indexRouter = require("./routes/index");
 const userRouter = require("./routes/userRoutes");
 const postRouter = require("./routes/postRouter");
 const commentRouter = require("./routes/commentRouter");
@@ -43,17 +42,18 @@ app.use(express.urlencoded({ extended: false }));
 // initialize passport
 app.use(passport.initialize());
 
-// no-auth routes
-app.use("/", indexRouter);
-
-// change to serve PRODUCTION BUILD FILES
-app.use(express.static(path.join(__dirname, "public")));
+// serve react app
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 // route handlers
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 
+// unhandled get requests
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
