@@ -22,15 +22,11 @@ import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 import PostFeedCard from "./PostCardComponent";
 import Layout from "./LayoutComponent";
 
-// todo
-// create ListingID page
-// error and loading handling
-
 // cardActionArea buttons
 function FooterOptions({ Icon, title, color, clickEvent }) {
   return (
     <Button color={color} onClick={clickEvent} >
-      {Icon && <Icon />}
+      <Icon  />
       <Typography color="text.primary" ml={1}> {title} </Typography>
     </Button>
   );
@@ -53,23 +49,23 @@ function PostPage(props) {
 
   // get all posts
   useEffect(() => {
-    axios.get(`/posts`)
+    axios.get("/posts")
       .then(response => {
-        setPosts(response.data)
-        console.log(response)
+        console.log("response:", response.data)
+        setPosts(response.data);
       })
       .catch(err => alert(err));
   }, []);
 
   // list posts
-  const postListDirectory = posts.map(posts => {
+  const postListDirectory = [posts].map(post => {
     return (
-      <Grid item mt={2} key={posts._id}>
+      <Grid item mt={2} key={post._id}>
         <PostFeedCard
-          username={posts._id}
-          text={posts.text}
-          media={posts.media}
-          subheader={posts.userInfo}
+          username={post._id}
+          text={post.text}
+          media={post.media}
+          subheader={post.userInfo}
         />
       </Grid>
     );
@@ -124,7 +120,7 @@ function PostPage(props) {
                     name="create a post"
                     label="create a post"
                     multiline
-                    maxRows={3}
+                    maxRows={2}
                     variant="outlined"
                     size="large"
                     sx={{ width: "90%" }}

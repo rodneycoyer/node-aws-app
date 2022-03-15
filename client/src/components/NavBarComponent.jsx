@@ -19,7 +19,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import WorkIcon from "@mui/icons-material/Work";
-import logo from "./logo192.png";
+import logo from "../styles/logo192.png";
 
 
 const NavBarOptions = ({ Icon, avatar }) => {

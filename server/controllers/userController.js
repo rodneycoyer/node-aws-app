@@ -1,6 +1,6 @@
 const User = require("../models/userModel");
 const passport = require("passport");
-const auth = require("../authenticate");
+const auth = require("../controllers/authenticate");
 
 /*********************************
  *          TOC
@@ -35,7 +35,11 @@ exports.user_login = async (req, res) => {
   const user = req.user;
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  res.json({ user: user.firstname, success: true, token: token, status: "You are successfully logged in!!"})
+  res.json({
+    user: user.firstname,
+    success: true, token: token,
+    status: "You are successfully logged in!!"
+  });
 };
 
 /**
@@ -84,7 +88,10 @@ exports.create_new_user = (req, res) => {
           passport.authenticate("local")(req, res, () => {
             res.statusCode = 200;
             res.setHeader("Content-Type", "application/json");
-            res.json({ success: true, status: "Registration was a Success!!" });
+            res.json({
+              success: true,
+              status: "Registration was a Success!!"
+            });
           });
         });
       }

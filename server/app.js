@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 // import routes
+const indexRouter = require("./routes/indexRouter");
 const userRouter = require("./routes/userRoutes");
 const postRouter = require("./routes/postRouter");
 const commentRouter = require("./routes/commentRouter");
@@ -46,11 +47,12 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 // route handlers
+app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 
-// unhandled get requests
+// unhandled UI requests
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
