@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import NavBar from "./NavBarComponent";
 
 // footer
-const Copyright = (props) => {
+const Copyright = () => {
   return (
     <Stack spacing={1} sx={{ mt: 8, mb: 4, alignItems: "center" }}>
       <Typography variant="body2" align="center">
@@ -25,7 +25,7 @@ const Copyright = (props) => {
   );
 }
 
-export default function Layout(props) {
+function Layout(props) {
   return (
     <React.Fragment>
       <NavBar />
@@ -34,3 +34,5 @@ export default function Layout(props) {
     </React.Fragment>
   );
 }
+
+export default Layout;

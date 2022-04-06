@@ -81,7 +81,7 @@ function Register() {
 
   return (
     <Container component="main" maxWidth="md" align="center">
-      <img src={logo} className="App-logo" alt="logo" width={150} />
+      <img src={logo} className="App-logo" alt="logo" width={350} />
         <Box
           component="form"
           sx={{
@@ -108,7 +108,6 @@ function Register() {
             name="lastname"
             label="lastname"
             variant="outlined"
-            autoFocus
             required
             value={formValue.lastname}
             onChange={handleFormChange}
@@ -118,7 +117,6 @@ function Register() {
             name="email"
             label="email"
             variant="outlined"
-            autoFocus
             required
             value={formValue.email}
             onChange={handleFormChange}
@@ -128,7 +126,6 @@ function Register() {
             name="username"
             label="username"
             variant="outlined"
-            autoFocus
             required
             value={formValue.username}
             onChange={handleFormChange}
@@ -145,7 +142,7 @@ function Register() {
           />
           <Stack direction="row" spacing={1}>
             <Button
-              color="info"
+              color="primary"
               variant="contained"
               fullWidth
               size="large"

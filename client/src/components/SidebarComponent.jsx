@@ -35,7 +35,7 @@ function RenderUserCard() {
         }}
       />
       <CardContent>
-        <Stack spacing={2} direction="column">
+        <Stack spacing={2} direction="column" >
           <Box>
             <Typography variant="h6">
               USERNAME
@@ -48,20 +48,29 @@ function RenderUserCard() {
             </Typography>
           </Box>
           <Divider />
-          <Box>
+          <Box display={"flex"}>
             <Typography variant="body2">
               Connections
             </Typography>
+            <Typography ml={"auto"}>
+              23
+            </Typography>
           </Box>
-          <Box>
+          <Box display={"flex"}>
             <Typography variant="body2">
               Chat Rooms
             </Typography>
+            <Typography ml={"auto"}>
+              23
+            </Typography>
           </Box>
           <Divider />
-          <Box>
+          <Box display={"flex"}>
             <Typography variant="body2">
               Liked Posts
+            </Typography>
+            <Typography ml="auto">
+              23
             </Typography>
           </Box>
         </Stack>
@@ -72,7 +81,7 @@ function RenderUserCard() {
 
 function RenderDiscoverMoreCard() {
   return (
-    <Card sx={{ }}>
+    <Card>
       <CardContent>
         <Typography variant="body2"> Discover More </Typography>
       </CardContent>
@@ -80,6 +89,7 @@ function RenderDiscoverMoreCard() {
   );
 }
 
+// Export Sidebar
 function Sidebar() {
   return (
     <Stack spacing={2}>

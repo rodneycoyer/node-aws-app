@@ -53,3 +53,4 @@ CMD ["npm", "start"]
 
 # non-root user
 USER node
+

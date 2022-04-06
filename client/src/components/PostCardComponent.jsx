@@ -18,7 +18,7 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 // footer buttons
-function FooterOptions({ Icon, title, color, clickEvent }) {
+function PostOptions({ Icon, title, color, clickEvent }) {
   return (
     <Button color={color} onClick={clickEvent} >
       {Icon && <Icon />}
@@ -29,7 +29,11 @@ function FooterOptions({ Icon, title, color, clickEvent }) {
   );
 }
 
-function PostFeedCard(props) {
+/**
+ * export Post Card
+ */
+
+function PostCard({text, media, username}) {
   return (
     <Card>
       <CardHeader
@@ -37,8 +41,8 @@ function PostFeedCard(props) {
           <Box sx={{ xs:3 }}>
             <IconButton>
               <Avatar
-                src={props.username}
-                alt={props.username}
+                src={"userImage"}
+                alt={"username"}
               />
             </IconButton>
           </Box>
@@ -48,24 +52,23 @@ function PostFeedCard(props) {
             <MoreHorizIcon />
           </IconButton>
         }
-        title={props.username}
-        subheader={props.author}
+        title={"username"}
+        subheader={"subheader or email"}
       />
       <CardContent sx={{ mb: 2 }}>
-        <Typography variant="p"> {props.title} </Typography>
-        <Typography variant="p"> {props.text} </Typography>
+        <Typography variant="p"> {text} </Typography>
+        <CardMedia> {media} </CardMedia>
       </CardContent>
-      <CardMedia> {props.media} </CardMedia>
       <Divider />
       <CardActionArea sx={{ pt: 1, pb: 1 }}>
         <Stack direction="row" spacing={1} ml={2} justifyContent="start">
-          <FooterOptions Icon={ThumbUpOutlinedIcon} title="like" color="primary" />
-          <FooterOptions Icon={CommentOutlinedIcon} title="comment" color="secondary" />
-          <FooterOptions Icon={ShareOutlinedIcon} title="share" color="success" />
+          <PostOptions Icon={ThumbUpOutlinedIcon} title="like" color="primary" />
+          <PostOptions Icon={CommentOutlinedIcon} title="comment" color="secondary" />
+          <PostOptions Icon={ShareOutlinedIcon} title="share" color="success" />
         </Stack>
       </CardActionArea>
     </Card>
   );
 }
 
-export default PostFeedCard;
+export default PostCard;

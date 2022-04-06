@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom/';
 import CssBaseline from '@mui/material/CssBaseline';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import theme from "./styles/theme";
@@ -9,13 +8,10 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-  <meta name="viewport" content="initial-scale=1, width=device-width" />
-  <ThemeProvider theme={theme}>
-  <CssBaseline />
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
-  </ThemeProvider>
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

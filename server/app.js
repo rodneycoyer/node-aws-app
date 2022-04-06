@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
 // serve react app
-app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "../client/build/")));
 
 // route handlers
 app.use("/", indexRouter);
@@ -53,8 +53,8 @@ app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 
 // unhandled UI requests
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build/"));
 });
 
 // catch 404 and forward to error handler

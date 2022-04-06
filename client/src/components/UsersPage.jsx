@@ -15,18 +15,18 @@ function Users() {
       .then((response) => {
         setUsers(response.data);
         setLoading(false);
+        console.log(response.data)
       })
       .catch(err => alert(err));
   }, []);
 
-  const listUsers = [users].map(user => {
-    if (loading === true) {
-      return <div> loading items </div>
-    }
+  const listUsers = users.map((user) => {
+    console.log("user", user)
     return (
       <Grid item key={user._id}>
         <Card data={user}>
-          {user}
+          {user.firstname}{" "}
+          {user.lastname}
         </Card>
       </Grid>
     );

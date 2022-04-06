@@ -24,9 +24,11 @@ import logo from "../styles/logo192.png";
 
 const NavBarOptions = ({ Icon, avatar }) => {
   return (
-    <IconButton>
-      {Icon && <Icon />}
-      {avatar && <Avatar />}
+    <IconButton >
+      <Badge badgeContent={1} overlap="circular" color="error">
+        {Icon && <Icon/>}
+        {avatar && <Avatar />}
+      </Badge>
     </IconButton>
   );
 }
@@ -59,28 +61,13 @@ function NavBar() {
               variant="outlined"
               size="small"
               sx={{ width: "20ch", mr: 5}}
-              inputProps={{
-                startadornment: (
-                  <InputAdornment position="end">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
             />
             <Box sx={{ display: { md: 'flex' }, ml: "auto" }}>
               <Stack direction="row" spacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Badge badgeContent={2} overlap="circular" color="error">
-                  <NavBarOptions Icon={SupervisorAccountIcon} />
-                </Badge>
-                <Badge badgeContent={1} overlap="circular" color="error">
-                  <NavBarOptions Icon={WorkIcon} />
-                </Badge>
-                <Badge badgeContent={17} overlap="circular" color="error">
+                <NavBarOptions Icon={SupervisorAccountIcon} />
+                <NavBarOptions Icon={WorkIcon} />
                 <NavBarOptions Icon={NotificationsIcon} />
-                </Badge>
-                <Badge badgeContent={5} overlap="circular" color="error">
-                  <NavBarOptions Icon={MessageIcon} />
-                </Badge>
+                <NavBarOptions Icon={MessageIcon} />
                 <Badge
                   variant="dot"
                   overlap="circular"
@@ -90,7 +77,7 @@ function NavBar() {
                     horizontal: 'right',
                   }}
                 >
-                <NavBarOptions Icon={AccountCircle} />
+                  <NavBarOptions Icon={AccountCircle} />
                 </Badge>
               </Stack>
             </Box>

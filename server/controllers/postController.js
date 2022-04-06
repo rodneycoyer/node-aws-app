@@ -33,6 +33,7 @@ exports.get_all_posts = async (req, res, next) => {
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.json(await getAllPostsPromise);
+    console.log(await getAllPostsPromise)
   }
   catch (err) {
     next(err);
@@ -64,6 +65,7 @@ exports.get_postId = async (req, res, next) => {
 exports.create_post = async (req, res, next) => {
   try {
     const createNewPostPromise = await Post.create(req.body);
+    req.body.author = req.user_id;
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.json(createNewPostPromise);

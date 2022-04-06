@@ -3,7 +3,6 @@ const passport = require("passport");
 const userController = require("../controllers/userController");
 const auth = require("../controllers/authenticate");
 const cors = require("../controllers/cors");
-
 const UserRouter = express.Router();
 
 // login

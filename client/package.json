@@ -30,7 +30,8 @@
     "eject": "react-scripts eject",
     "test1": "echo `client package test script working`"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:8080/",
+  "homepage": ".",
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -59,10 +59,11 @@ const SignIn = () => {
       url: `/users/login`
     })
     .then(response => {
-      console.log(response);
-      alert(response.data.user);
+      console.log(response.data);
+      alert(response.data.status);
+      window.location.href = "/posts";
     })
-    .catch(err => alert(err));
+    .catch(err => console.log(err));
   }
 
   return (

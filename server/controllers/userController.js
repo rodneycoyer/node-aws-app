@@ -2,33 +2,10 @@ const User = require("../models/userModel");
 const passport = require("passport");
 const auth = require("../controllers/authenticate");
 
-/*********************************
- *          TOC
- *  1. unsupported operation
- *  2. login
- *  3. logout
- *  4. create new user
- *  5. get all users
- *  6. get userId
- *  7. update userId
- *  8. delete userId
- *          TBA
- *  1. google OAuth 2.0 support
- *
- *********************************/
-
-/**
- * 1. unsupported requests
- */
-
 exports.unsupported = (req, res) => {
   res.statusCode = 403;
   res.end("Operation not supported");
 };
-
-/**
- * 2. login
- */
 
 exports.user_login = async (req, res) => {
   const token = await auth.get_jwt({ _id: req.user._id });
@@ -36,15 +13,11 @@ exports.user_login = async (req, res) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.json({
-    user: user.firstname,
+    user: user.username,
     success: true, token: token,
     status: "You are successfully logged in!!"
   });
 };
-
-/**
- * 3. logout
- */
 
 exports.user_logout = (req, res, next) => {
   if (req.session) {
@@ -57,10 +30,6 @@ exports.user_logout = (req, res, next) => {
     return next(err);
   }
 };
-
-/**
- * 4. create new user
- */
 
 exports.create_new_user = (req, res) => {
   User.register(
@@ -99,26 +68,18 @@ exports.create_new_user = (req, res) => {
   );
 };
 
-/**
- * 5. get all users
- */
-
 exports.get_all_users = async (req, res, next) => {
   try {
-    const getAllUsersPromise = User.find();
+    const getAllUsersPromise = await User.find();
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
-    res.json(await getAllUsersPromise);
-    console.log( await getAllUsersPromise)
+    res.json(getAllUsersPromise);
+    console.log(getAllUsersPromise)
   }
   catch (err) {
     next(err);
   }
 };
-
-/**
- * 6. get userId
- */
 
 exports.get_userId = async (req, res, next) => {
   try {
@@ -131,10 +92,6 @@ exports.get_userId = async (req, res, next) => {
     next(err);
   }
 };
-
-/**
- * 7. update userId
- */
 
 exports.update_userId = async (req, res, next) => {
   try {
@@ -151,10 +108,6 @@ exports.update_userId = async (req, res, next) => {
     next(err);
   }
 };
-
-/**
- * 8. delete userId
- */
 
 exports.delete_userId = async (req, res, next) => {
   try {
